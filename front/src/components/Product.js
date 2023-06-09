@@ -13,6 +13,7 @@ function Products() {
     const navigate = useNavigate();
     const [products, setProducts] = useState();
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [rol, setRol] = useState(localStorage.getItem("rol"));
     const [product, setProduct] = useState();
 
     const [createProduct, setCreateProduct] = useState(false);
@@ -62,7 +63,10 @@ function Products() {
                 </Row>
                 <Row>
                     <Col>
-                        <Button variant="success" onClick={() => setCreateProduct(true)}>Crear producto</Button>
+                        {rol == "Administrador" && 
+                            <Button variant="success" onClick={() => setCreateProduct(true)}>Crear producto</Button>
+                        }
+
                         {products &&
                             <div>
 
@@ -82,25 +86,27 @@ function Products() {
                                                     <td>{value.name}</td>
                                                     <td>{value.quantity}</td>
                                                     <td>{value.price}</td>
-                                                    <td className='d-flex justify-content-between'>
+                                                    {rol == "Administrador" && 
+                                                        <td className='d-flex justify-content-between'>
 
-                                                        <Button onClick={() => { setEditProduct(true); setProduct({ 
-                                                            id: value._id, 
-                                                            name: value.name,
-                                                            quantity: value.quantity,
-                                                            price: value.price,
-                                                            photo: value.photo
-                                                        }) }}>
-                                                            <BiPencil />
-                                                        </Button>
-
-                                                        <Button variant='danger'
-                                                            onClick={() => { setDeleteProduct(true); setProduct({ 
-                                                                id: value._id
+                                                            <Button onClick={() => { setEditProduct(true); setProduct({ 
+                                                                id: value._id, 
+                                                                name: value.name,
+                                                                quantity: value.quantity,
+                                                                price: value.price,
+                                                                photo: value.photo
                                                             }) }}>
-                                                            <BiTrashAlt />
-                                                        </Button>
-                                                    </td>
+                                                                <BiPencil />
+                                                            </Button>
+
+                                                            <Button variant='danger'
+                                                                onClick={() => { setDeleteProduct(true); setProduct({ 
+                                                                    id: value._id
+                                                                }) }}>
+                                                                <BiTrashAlt />
+                                                            </Button>
+                                                        </td>
+                                                    }
                                                 </tr>
                                             );
                                         })}

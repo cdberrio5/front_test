@@ -13,6 +13,7 @@ function Company() {
     const navigate = useNavigate();
     const [companies, setCompanies] = useState();
     const [token, setToken] = useState(localStorage.getItem("token"));
+    const [rol, setRol] = useState(localStorage.getItem("rol"));
     const [company, setCompany] = useState();
 
     const [createCompany, setCreateCompany] = useState(false);
@@ -62,7 +63,10 @@ function Company() {
                 </Row>
                 <Row>
                     <Col>
-                        <Button variant="success" onClick={() => setCreateCompany(true)}>Crear compañias</Button>
+                        {rol == "Administrador" &&
+                            <Button variant="success" onClick={() => setCreateCompany(true)}>Crear compañias</Button>
+                        }
+
                         {companies &&
                             <div>
 
@@ -84,25 +88,27 @@ function Company() {
                                                     <td>{value.phone}</td>
                                                     <td>{value.address}</td>
                                                     <td>{value.NIT}</td>
-                                                    <td className='d-flex justify-content-between'>
-
-                                                        <Button onClick={() => { setEditCompany(true); setCompany({ 
-                                                            id: value._id, 
-                                                            name: value.name,
-                                                            phone: value.phone,
-                                                            address: value.address,
-                                                            NIT: value.NIT
-                                                        }) }}>
-                                                            <BiPencil />
-                                                        </Button>
-
-                                                        <Button variant='danger'
-                                                            onClick={() => { setDeleteCompany(true); setCompany({ 
+                                                    
+                                                    {rol == "Administrador" &&
+                                                        <td className='d-flex justify-content-between'>
+                                                            <Button onClick={() => { setEditCompany(true); setCompany({ 
+                                                                id: value._id, 
+                                                                name: value.name,
+                                                                phone: value.phone,
+                                                                address: value.address,
                                                                 NIT: value.NIT
                                                             }) }}>
-                                                            <BiTrashAlt />
-                                                        </Button>
-                                                    </td>
+                                                                <BiPencil />
+                                                            </Button>
+
+                                                            <Button variant='danger'
+                                                                onClick={() => { setDeleteCompany(true); setCompany({ 
+                                                                    NIT: value.NIT
+                                                                }) }}>
+                                                                <BiTrashAlt />
+                                                            </Button>
+                                                        </td>
+                                                    }
                                                 </tr>
                                             );
                                         })}

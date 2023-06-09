@@ -31,6 +31,7 @@ const Login = () => {
             toast.success("Sesion iniciada");
 
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("rol", response.data.rol);
 
             navigate("/");
         } catch (error) {

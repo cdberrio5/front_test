@@ -18,7 +18,7 @@ class AuthController {
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const newUser = new User({ email, password: hashedPassword, name });
+      const newUser = new User({ email, password: hashedPassword, name, rol: 'Externo' });
       await newUser.save();
 
       res.status(201).json({ message: 'Usuario creado exitosamente' });
@@ -51,7 +51,7 @@ class AuthController {
         expiresIn: '1h',
       });
 
-      res.json({ token });
+      res.json({ token, rol: user.rol });
     } catch (error) {
       res.status(500).json({ message: 'Error interno del servidor' });
     }
