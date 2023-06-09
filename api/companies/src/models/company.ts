@@ -5,6 +5,7 @@ export interface ICompany extends Document {
   address: string;
   name: string;
   phone: number;
+  active: number;
 }
 
 const CompanySchema = new Schema({
@@ -12,6 +13,7 @@ const CompanySchema = new Schema({
   address: { type: String, required: true },
   name: { type: String, required: true, unique: true },
   phone: { type: Number, required: true },
+  active: { type: Number, required: true }
 });
 
 export default model<ICompany>('Company', CompanySchema);
