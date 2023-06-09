@@ -27,7 +27,7 @@ const Register = () => {
         e.preventDefault();        
 
         try {
-            await axios.post("http://localhost:3001/api/auth/register", {email, password, name: fullName});
+            await axios.post("https://dashboard-api-users.herokuapp.com/api/auth/register", {email, password, name: fullName});
 
             toast.success("Cuenta creada");
 

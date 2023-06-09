@@ -27,7 +27,7 @@ function Company() {
     const getCompanies = async () => {
         const load = toast.loading("");
         try {
-            const response = await axios.get('http://localhost:3003/api/company/get', {
+            const response = await axios.get('https://dashboard-api-companies.herokuapp.com/api/company/get', {
                 headers: {
                     authorization: token
                 }

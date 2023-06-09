@@ -26,7 +26,7 @@ const Login = () => {
         e.preventDefault();        
 
         try {
-            const response = await axios.post("http://localhost:3001/api/auth/login", {email, password});
+            const response = await axios.post("https://dashboard-api-users.herokuapp.com/api/auth/login", {email, password});
 
             toast.success("Sesion iniciada");
 

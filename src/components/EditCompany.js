@@ -12,7 +12,7 @@ function ModalEditCompany(props) {
     const submit = async () => {
         const load = toast.loading("");
         try {
-            await axios.post("http://localhost:3003/api/company/edit", {name, address, phone, NIT}, {
+            await axios.post("https://dashboard-api-companies.herokuapp.com/api/company/edit", {name, address, phone, NIT}, {
                 headers: {
                     authorization: props.token
                 }

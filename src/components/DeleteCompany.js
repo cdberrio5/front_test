@@ -9,7 +9,7 @@ function ModalDeleteCompany(props) {
     const submit = async () => {
         const load = toast.loading("");
         try {
-            await axios.post("http://localhost:3003/api/company/delete", {NIT}, {
+            await axios.post("https://dashboard-api-companies.herokuapp.com/api/company/delete", {NIT}, {
                 headers: {
                     authorization: props.token
                 }

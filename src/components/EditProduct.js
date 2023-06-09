@@ -14,7 +14,7 @@ function ModalEditProduct(props) {
     const submit = async () => {
         const load = toast.loading("");
         try {
-            await axios.post("http://localhost:3002/api/product/edit", {quantity, name, price, photo, id}, {
+            await axios.post("https://dashboard-api-inventory.herokuapp.com/api/product/edit", {quantity, name, price, photo, id}, {
                 headers: {
                     authorization: props.token
                 }

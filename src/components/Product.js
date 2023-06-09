@@ -27,7 +27,7 @@ function Products() {
     const getProducts = async () => {
         const load = toast.loading("");
         try {
-            const response = await axios.get('http://localhost:3002/api/product/get', {
+            const response = await axios.get('https://dashboard-api-inventory.herokuapp.com/api/product/get', {
                 headers: {
                     authorization: token
                 }

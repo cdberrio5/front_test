@@ -27,7 +27,7 @@ function ModalCreateProduct(props) {
             formData.append("price", price);
             formData.append("companyId", companyId);
 
-            await axios.post("http://localhost:3002/api/product/register", formData, {
+            await axios.post("https://dashboard-api-inventory.herokuapp.com/api/product/register", formData, {
                 headers: {
                     authorization: props.token
                 }
@@ -63,7 +63,7 @@ function ModalCreateProduct(props) {
     const getCompanies = async () => {
         const load = toast.loading("");
         try {
-            const response = await axios.get('http://localhost:3003/api/company/get', {
+            const response = await axios.get('https://dashboard-api-companies.herokuapp.com/api/company/get', {
                 headers: {
                     authorization: props.token
                 }
