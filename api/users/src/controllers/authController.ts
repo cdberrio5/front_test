@@ -23,6 +23,8 @@ class AuthController {
 
       res.status(201).json({ message: 'Usuario creado exitosamente' });
     } catch (error) {
+      console.log(error);
+      
       res.status(500).json({ error, message: 'Error interno del servidor' });
     }
   }

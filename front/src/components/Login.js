@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Button, Row, Container, Image, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-
-import 'react-toastify/dist/ReactToastify.css';
-
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import logo from './../assets/logo.jpg';
@@ -43,8 +40,6 @@ const Login = () => {
 
     return (
         <div>
-            <ToastContainer />
-
             <Container>
                 <Row className="vh-100 d-flex justify-content-center align-items-center">
                     <Col md={8} lg={6} xs={12}>

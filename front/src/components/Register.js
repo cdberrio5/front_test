@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Button, Row, Container, Image, Card, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 import logo from './../assets/logo.jpg';
 
-
 const Register = () => {
     const navigate = useNavigate();
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [fullName, setFullName] = useState();
 
     useEffect(() => {
       const token = localStorage.getItem("token");
@@ -17,6 +22,20 @@ const Register = () => {
       }
         
     }, [navigate]);
+
+    const submit = async (e) => {
+        e.preventDefault();        
+
+        try {
+            await axios.post("http://localhost:3001/api/auth/register", {email, password, name: fullName});
+
+            toast.success("Cuenta creada");
+
+            navigate("/auth/");
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
 
     return (
         <div>
@@ -35,19 +54,27 @@ const Register = () => {
                                         src={logo} />
                                     <h3 className="mb-5">Dashboard</h3>
                                     <div className="mb-3">
-                                        <Form>
+                                        <Form onSubmit={submit}>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label className="text-center">
                                                     Nombre completo
                                                 </Form.Label>
-                                                <Form.Control type="text" placeholder="Nombre completo" />
+                                                <Form.Control 
+                                                    type="text" 
+                                                    placeholder="Nombre completo" 
+                                                    onChange={e => setFullName(e.target.value)}
+                                                    />
                                             </Form.Group>
 
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label className="text-center">
                                                     Correo electronico
                                                 </Form.Label>
-                                                <Form.Control type="email" placeholder="Correo electronico" />
+                                                <Form.Control 
+                                                    type="email" 
+                                                    placeholder="Correo electronico" 
+                                                    onChange={e => setEmail(e.target.value)}
+                                                    />
                                             </Form.Group>
 
                                             <Form.Group
@@ -55,7 +82,11 @@ const Register = () => {
                                                 controlId="formBasicPassword"
                                             >
                                                 <Form.Label>Contraseña</Form.Label>
-                                                <Form.Control type="password" placeholder="Contraseña" />
+                                                <Form.Control 
+                                                    type="password" 
+                                                    placeholder="Contraseña" 
+                                                    onChange={e => setPassword(e.target.value)}
+                                                    />
                                             </Form.Group>
                                             <div className="d-grid">
                                                 <Button variant="primary" type="submit">
