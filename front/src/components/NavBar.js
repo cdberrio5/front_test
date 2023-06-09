@@ -17,6 +17,11 @@ function Menu() {
       
   }, [navigate]);
 
+  const closeSession = () => {
+    localStorage.removeItem("token");
+    navigate("/auth");
+  }
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -46,7 +51,7 @@ function Menu() {
                   />
               } 
               id="basic-nav-dropdown">
-                  <NavDropdown.Item eventKey="4.1">Cerrar sesion</NavDropdown.Item>
+                  <NavDropdown.Item onClick={closeSession}>Cerrar sesion</NavDropdown.Item>
           </NavDropdown>
         </Container>
       </Navbar>
