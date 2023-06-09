@@ -2,7 +2,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import companyRoutes from './routes/companyRoutes';
+import productRoutes from './routes/productRoutes';
 import connectDatabase from './config/dbConfig';
 import errorHandler from './middlewares/errorHandler';
 import logger from './config/logger';
@@ -52,7 +52,7 @@ class App {
   }
 
   private setupRoutes(): void {
-    this.app.use('/api/company', companyRoutes);
+    this.app.use('/api/product', productRoutes);
   }
 }
 
