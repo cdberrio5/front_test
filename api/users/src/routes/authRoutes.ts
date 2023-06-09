@@ -17,6 +17,6 @@ const loginSchema = Joi.object({
 });
 
 router.post('/register', validate(registerSchema), AuthController.register);
-router.post('/login', validate(registerSchema), AuthController.login);
+router.post('/login', validate(loginSchema), AuthController.login);
 
 export default router;
