@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from './../models/user';
+import env from './../dotenv';
 
 class AuthController {
   public async register(req: Request, res: Response): Promise<void> {
@@ -44,7 +45,7 @@ class AuthController {
         return;
       }
 
-      const token = jwt.sign({ email: user.email }, 'secret_key', {
+      const token = jwt.sign({ email: user.email }, env.jwtSecret, {
         expiresIn: '1h',
       });
 

@@ -3,7 +3,7 @@ import env from './../dotenv';
 
 const connectDatabase = async (): Promise<void> => {
   try {
-    const MONGODB_URI = env.mongoURI ? env.mongoURI : "";
+    const MONGODB_URI = env.mongoURI;
 
     await mongoose.connect(MONGODB_URI);
     
