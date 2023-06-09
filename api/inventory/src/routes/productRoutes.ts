@@ -39,7 +39,7 @@ const router = express.Router();
 router.post('/register', authenticateToken, uploadRegister.single('image'), ProductController.register);
 router.post('/edit', authenticateToken, uploadEdit.single('image'), ProductController.edit);
 router.post('/delete', authenticateToken, ProductController.delete);
-router.post('/get', authenticateToken, ProductController.get);
+router.get('/get', authenticateToken, ProductController.get);
 router.post('/getByCompany', authenticateToken, ProductController.getByCompany);
 
 export default router;

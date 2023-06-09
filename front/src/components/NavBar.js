@@ -38,7 +38,7 @@ function Menu() {
             Dashboard
           </Navbar.Brand>
           <Nav className="me-auto">
-              <Nav.Link href="/">Compañias</Nav.Link>
+              <Nav.Link href="/companies">Compañias</Nav.Link>
               <Nav.Link href="/products">Productos</Nav.Link>
           </Nav>
           <NavDropdown className='d-flex justify-content-between align-items-center'

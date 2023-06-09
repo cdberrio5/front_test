@@ -8,6 +8,7 @@ import Navbar from './components/NavBar';
 import Login from './components/Login';
 import Register from './components/Register';
 import Company from './components/Company';
+import Product from './components/Product';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navbar />}>
             <Route path="companies" element={<Company />} />
-            <Route path="products" element={<Navbar />} />
+            <Route path="products" element={<Product />} />
           </Route>
           <Route path="/auth">
             <Route index element={<Login />} />

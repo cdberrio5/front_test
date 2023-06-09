@@ -22,9 +22,11 @@ class ProductController {
 
   public async edit(req: Request, res: Response): Promise<void> {
     try {
-      const { name, quantity, price, photo, _id } = req.body;
+      const { name, quantity, price, photo, id } = req.body;
 
-      const existingProduct = await Product.findOne({ _id });
+      const existingProduct = await Product.findOne({ _id: id });
+
+      console.log(id);
 
       if (!existingProduct) {
         res.status(400).json({ message: 'El producto no existe' });
@@ -46,14 +48,14 @@ class ProductController {
 
   public async delete(req: Request, res: Response): Promise<void> {
     try {
-      const { _id } = req.body;
+      const { id } = req.body;
 
-      const existingProduct = await Product.findOne({ _id });
+      const existingProduct = await Product.findOne({ _id: id });
 
       if (!existingProduct) {
         res.status(400).json({ message: 'El producto no existe' });
         return;
-      }
+      }      
 
       existingProduct.active = 0;
 

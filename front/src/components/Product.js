@@ -5,35 +5,35 @@ import { BiPencil, BiTrashAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
-import CreateCompany from './CreateCompany';
-import EditCompany from './EditCompany';
-import DeleteCompany from './DeleteCompany';
+import CreateProduct from './CreateProduct';
+import EditProduct from './EditProduct';
+import DeleteProduct from './DeleteProduct';
 
-function Company() {
+function Products() {
     const navigate = useNavigate();
-    const [companies, setCompanies] = useState();
+    const [products, setProducts] = useState();
     const [token, setToken] = useState(localStorage.getItem("token"));
-    const [company, setCompany] = useState();
+    const [product, setProduct] = useState();
 
-    const [createCompany, setCreateCompany] = useState(false);
-    const [editCompany, setEditCompany] = useState(false);
-    const [deleteCompany, setDeleteCompany] = useState(false);
+    const [createProduct, setCreateProduct] = useState(false);
+    const [editProduct, setEditProduct] = useState(false);
+    const [deleteProduct, setDeleteProduct] = useState(false);
 
     useEffect(() => {
-        getCompanies();
+        getProducts();
     }, []);
 
-    const getCompanies = async () => {
+    const getProducts = async () => {
         const load = toast.loading("");
         try {
-            const response = await axios.get('http://localhost:3003/api/company/get', {
+            const response = await axios.get('http://localhost:3002/api/product/get', {
                 headers: {
                     authorization: token
                 }
             });
 
-            setCompanies(response.data.data);
-            toast.update(load, { render: "Compañias cargadas", type: "success", isLoading: false });
+            setProducts(response.data.data);
+            toast.update(load, { render: "Productos cargadas", type: "success", isLoading: false });
             toast.dismiss();
             return;
         } catch (error) {
@@ -57,48 +57,46 @@ function Company() {
             <Container className="App">
                 <Row>
                     <Col>
-                        <h1 style={{margin: "20px 0"}}>Compañias</h1>
+                        <h1 style={{margin: "20px 0"}}>Productos</h1>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Button variant="success" onClick={() => setCreateCompany(true)}>Crear compañias</Button>
-                        {companies &&
+                        <Button variant="success" onClick={() => setCreateProduct(true)}>Crear producto</Button>
+                        {products &&
                             <div>
 
                                 <Table striped bordered hover>
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Telefono</th>
-                                            <th>Direccion</th>
-                                            <th>NIT</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
                                             <th>#</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {companies.map(value => {
+                                        {products.map(value => {
                                             return (
                                                 <tr key={value._id}>
                                                     <td>{value.name}</td>
-                                                    <td>{value.phone}</td>
-                                                    <td>{value.address}</td>
-                                                    <td>{value.NIT}</td>
+                                                    <td>{value.quantity}</td>
+                                                    <td>{value.price}</td>
                                                     <td className='d-flex justify-content-between'>
 
-                                                        <Button onClick={() => { setEditCompany(true); setCompany({ 
+                                                        <Button onClick={() => { setEditProduct(true); setProduct({ 
                                                             id: value._id, 
                                                             name: value.name,
-                                                            phone: value.phone,
-                                                            address: value.address,
-                                                            NIT: value.NIT
+                                                            quantity: value.quantity,
+                                                            price: value.price,
+                                                            photo: value.photo
                                                         }) }}>
                                                             <BiPencil />
                                                         </Button>
 
                                                         <Button variant='danger'
-                                                            onClick={() => { setDeleteCompany(true); setCompany({ 
-                                                                NIT: value.NIT
+                                                            onClick={() => { setDeleteProduct(true); setProduct({ 
+                                                                id: value._id
                                                             }) }}>
                                                             <BiTrashAlt />
                                                         </Button>
@@ -111,9 +109,9 @@ function Company() {
                             </div>
                         }
 
-                        {!companies &&
+                        {!products &&
                             <Alert key={"warning"} variant={"warning"}>
-                                No hay compañias para mostrar
+                                No hay productos para mostrar
                             </Alert>
                         }
                     </Col>
@@ -121,19 +119,19 @@ function Company() {
 
             </Container>
 
-            {createCompany &&
-                <CreateCompany closeModal={setCreateCompany} token={token} loadData={getCompanies} />
+            {createProduct &&
+                <CreateProduct closeModal={setCreateProduct} token={token} loadData={getProducts} />
             }   
 
-            {editCompany &&
-                <EditCompany company={company} closeModal={setEditCompany} token={token} loadData={getCompanies} />
+            {editProduct &&
+                <EditProduct product={product} closeModal={setEditProduct} token={token} loadData={getProducts} />
             }
 
-            {deleteCompany &&
-                <DeleteCompany company={company} closeModal={setDeleteCompany} token={token} loadData={getCompanies} />
+            {deleteProduct &&
+                <DeleteProduct product={product} closeModal={setDeleteProduct} token={token} loadData={getProducts} />
             }
         </div>
     )
 }
 
-export default Company;
+export default Products;
