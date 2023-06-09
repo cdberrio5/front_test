@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Container, Navbar, Image, Nav, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import logo from './../assets/logo.jpg';
 import user from './../assets/user.jpg'
@@ -55,6 +56,8 @@ function Menu() {
           </NavDropdown>
         </Container>
       </Navbar>
+
+      <Outlet />
     </>
   );
 }

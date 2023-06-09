@@ -7,6 +7,7 @@ import connectDatabase from './config/dbConfig';
 import errorHandler from './middlewares/errorHandler';
 import logger from './config/logger';
 import helmet from 'helmet';
+import cors from 'cors';
 
 class App {
   public app: Application;
@@ -23,6 +24,7 @@ class App {
   private config(): void {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(cors());
     this.app.use( (req: Request, res: Response, next: NextFunction) => {
       logger.info(`${req.method} ${req.url}`);
       next();

@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import Navbar from './components/NavBar';
 import Login from './components/Login';
 import Register from './components/Register';
-
+import Company from './components/Company';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Navbar />}>
-            <Route index element={<Navbar />} />
+            <Route path="companies" element={<Company />} />
             <Route path="products" element={<Navbar />} />
           </Route>
           <Route path="/auth">

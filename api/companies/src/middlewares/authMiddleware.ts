@@ -11,13 +11,13 @@ export const authenticateToken = (
   const token = req.headers['authorization'];
 
   if (!token) {
-    res.sendStatus(401);
+    res.status(401).json({ message: "The token are required" });
     return;
   }
 
   jwt.verify(token, env.jwtSecret, (err) => {
     if (err) {
-      res.sendStatus(403);
+      res.status(403).json({ message: "Session expired", error: "closeSession" });
       return;
     }
     next();

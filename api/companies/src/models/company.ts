@@ -11,7 +11,7 @@ export interface ICompany extends Document {
 const CompanySchema = new Schema({
   NIT: { type: Number, required: true, unique: true },
   address: { type: String, required: true },
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   phone: { type: Number, required: true },
   active: { type: Number, required: true }
 });
